@@ -1,1 +1,81 @@
-# Support-
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>پشتیبانی</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: #f0f0f0;
+      font-family: sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 50px;
+      text-align: center;
+    }
+    h1 {
+      color: #333;
+      margin-bottom: 30px;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 400px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    button {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>پشتیبانی</h1>
+
+<form id="supportForm">
+  <input type="text" id="name" placeholder="نام شما" required>
+  <input type="tel" id="phone" placeholder="شماره تماس" required>
+  <input type="text" id="time" placeholder="ساعت درخواست" readonly>
+  <button type="submit">ارسال به واتساپ</button>
+</form>
+
+<script>
+  // تنظیم خودکار ساعت هنگام باز شدن صفحه
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('fa-IR', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('time').value = timeStr;
+
+  document.getElementById('supportForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const phone = document.getElementById('phone').value;
+    const time = document.getElementById('time').value;
+
+    const text = `سلام، من ${name} هستم.\nشماره تماس: ${phone}\nساعت درخواست: ${time}`;
+    const encoded = encodeURIComponent(text);
+    const whatsappLink = `https://wa.me/989919854341text=${encoded}`; // شماره‌تو بذار اینجا
+
+    window.open(whatsappLink, '_blank');
+  });
+</script>
+
+</body>
+</html>
